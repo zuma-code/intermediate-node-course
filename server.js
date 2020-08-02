@@ -31,27 +31,34 @@ app.post('/users', (req, res) => {
     email: req.body.email,
     password: req.body.password
   }, (err, data) => {
-    if (err) {
-      res.json({ success: false, message: err })
-    } else if (!data) {
-      res.json({ success: false, message: "Not Found" })
-    } else {
-      res.json({ success: true, data: data })
-    }
+    sendResponse(res, err, data)
   })
 })
+
+function sendResponse(res, err, data) {
+  if (err) {
+    res.json({
+      success: false,
+      message: err
+    })
+  } else if (!data) {
+    res.json({
+      success: false,
+      message: "Not Found"
+    })
+  } else {
+    res.json({
+      success: true,
+      data: data
+    })
+  }
+}
 
 app.route('/users/:id')
   // READ
   .get((req, res) => {
     User.findById(req.params.id, (err, data) => {
-      if (err) {
-        res.json({ success: false, message: err })
-      } else if (!data) {
-        res.json({ success: false, message: "Not Found" })
-      } else {
-        res.json({ success: true, data: data })
-      }
+      sendResponse(res, err, data)
     })
   })
   // UPDATE
@@ -61,24 +68,12 @@ app.route('/users/:id')
       email: req.body.email,
       password: req.body.password
     }, (err, data) => {
-      if (err) {
-        res.json({ success: false, message: err })
-      } else if (!data) {
-        res.json({ success: false, message: "Not Found" })
-      } else {
-        res.json({ success: true, data: data })
-      }
+      sendResponse(res, err, data)
     })
   })
   // DELETE
   .delete((req, res) => {
     User.findByIdAndDelete(req.params.id, (err, data) => {
-      if (err) {
-        res.json({ success: false, message: err })
-      } else if (!data) {
-        res.json({ success: false, message: "Not Found" })
-      } else {
-        res.json({ success: true, data: data })
-      }
+      sendResponse(res, err, data)
     })
   })
