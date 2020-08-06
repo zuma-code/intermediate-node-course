@@ -13,7 +13,7 @@ app.listen(port, () => {
 
 // CONNECT TO DATABASE
 // Had trouble connecting to the Db because of spaces in my connection string
-const DB = "mongodb+srv://Luke:5zZq6aBNpgvFcuC6@cluster0.jdtmc.mongodb.net/IntermediateCourse?retryWrites=true&w=majority";
+const DB = "mongodb+srv://Luke:5zZq6a@cluster0.jdtmc.mongodb.net/IntermediateCourse?retryWrites=true&w=majority";
 mongoose.connect(DB, {
   useNewUrlParser: true,
   useUnifiedTopology: true
